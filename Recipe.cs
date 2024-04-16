@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,40 +6,77 @@ using System.Threading.Tasks;
 
 namespace PROG6221_part1
 {
-    // Class representing a recipe
+    /// <summary>
+    /// Class representing a recipe
+    /// </summary>
+    ///-----------------------------------------------------------------------------------------------------------///
     public class Recipe
     {
+        //getter and setter for the name of the recipe
         public string Name { get; set; }
-        public Ingredient[] Ingredients { get; set; }
-        public Step[] Steps { get; set; }
 
-        // Constructor
+        //getter and setter for the ingredients array
+        public Ingredient[] Ingredients { get; set; }
+
+        //getter and setter for the original quantities entered array
+        public Ingredient[] OriginalQuantities { get; set; }
+
+        //getter abd setter for the steps array
+        public Step[] Steps { get; set; }
+        //---------------------------------------------------------------------------------------------------------------//
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="ingredients"></param>
+        /// <param name="steps"></param>
+        ///-------------------------------------------------------------------------------------------------------------///
         public Recipe(string name, Ingredient[] ingredients, Step[] steps)
         {
             Name = name;
             Ingredients = ingredients;
             Steps = steps;
-        }
 
-        // Method to display the recipe
+            // Store original quantities
+            OriginalQuantities = new Ingredient[ingredients.Length];
+            for (int i = 0; i < ingredients.Length; i++)
+            {
+                // Copy ingredient details to OriginalQuantities array
+                OriginalQuantities[i] = new Ingredient(ingredients[i].Name, ingredients[i].Quantity, ingredients[i].Unit);
+            }
+        }
+        //----------------------------------------------------------------------------------------------------------------//
+
+        /// <summary>
+        /// Method to display the recipe( recipe name, ingreidents and steps)
+        /// </summary>
+        /// -------------------------------------------------------------------------------------------------------------///
         public void DisplayRecipe()
         {
+            Console.WriteLine("-------------------------------------------------");
             Console.WriteLine($"Recipe: {Name}\n");
-
+            Console.WriteLine("-------------------------------------------------");
             Console.WriteLine("Ingredients:");
             foreach (var ingredient in Ingredients)
             {
                 Console.WriteLine($"{ingredient.Quantity} {ingredient.Unit} of {ingredient.Name}");
             }
-
+            Console.WriteLine("-------------------------------------------------");
             Console.WriteLine("\nSteps:");
             for (int i = 0; i < Steps.Length; i++)
             {
                 Console.WriteLine($"{i + 1}. {Steps[i].Description}");
             }
+            Console.WriteLine("-------------------------------------------------");
         }
-
-        // Method to scale the recipe by a factor
+        //-----------------------------------------------------------------------------------------------------------------//
+        
+        /// <summary>
+        ///  Method to scale the recipe by a factor
+        /// </summary>
+        /// <param name="factor"></param>
+        /// ---------------------------------------------------------------------------------------------------------------//
         public void ScaleRecipe(double factor)
         {
             foreach (var ingredient in Ingredients)
@@ -47,16 +84,20 @@ namespace PROG6221_part1
                 ingredient.Quantity *= factor;
             }
         }
+        //-------------------------------------------------------------------------------------------------------------------//
 
-        // Method to reset ingredient quantities to original values
+        /// <summary>
+        /// Method to reset ingredient quantities to original values
+        /// </summary>
+        /// ---------------------------------------------------------------------------------------------------------------///
         public void ResetQuantities()
         {
-            // Assuming original quantities are stored elsewhere and retrieved when needed
-            // For simplicity, let's just reset quantities to 1
-            foreach (var ingredient in Ingredients)
+            // Restore original quantities
+            for (int i = 0; i < Ingredients.Length; i++)
             {
-                ingredient.Quantity = 1;
+                Ingredients[i].Quantity = OriginalQuantities[i].Quantity;
             }
         }
     }
 }
+//---------------------------------------------------------End of Class------------------------------------------------------//
