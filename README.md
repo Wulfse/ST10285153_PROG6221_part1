@@ -10,10 +10,10 @@ Table of Contents:
 -How to use
 
 
-Introduction
+Introduction:
 The Recipe App is a simple command-line application written in C# that allows users to create and manage recipes. It provides functionalities to add ingredients, steps, scale the recipe, reset ingredient quantities, and start a new recipe.
 
-Features
+Features:
 -Create new recipes with ingredients and steps
 -Display recipes with neat formatting
 -Scale recipe by a factor (0.5 for half, 2 for double, 3 for triple)
@@ -22,20 +22,20 @@ Features
 
 
 
-Requirements
+Requirements:
 -.NET Core SDK installed on your machine.
 
--Installation
+-Installation:
 --Clone this repository to your local machine using git clone.
 --Navigate to the project directory.
 
-Usage
+Usage:
 -Open your terminal or command prompt.
 -Navigate to the project directory.
 -Run the application using the following command: "dotnet run"
 -Follow the on-screen prompts to create, manage, and scale recipes.
 
-How to use
+How to use:
 -once running you follow the prompts to create your first recipe
 -after this it will display your recipe with a few options
 -these options are: 1. scale the recipe values
